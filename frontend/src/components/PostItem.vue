@@ -25,7 +25,7 @@
         <!-- <p>{{props.number}}</p> -->
       </div>
     </div>
-    <PostUDetails />
+    <!-- <PostUDetails /> -->
   </div>
 </template>
 
