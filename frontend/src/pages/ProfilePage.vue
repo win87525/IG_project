@@ -1,50 +1,66 @@
 <template>
   <div>
     <div class="profileContainer">
-      <the-avatar src="/src/assets/portfolio/88178.jpg" :width="186" :height="186"></the-avatar>
+      <the-avatar
+        src="/src/assets/portfolio/88178.jpg"
+        :width="186"
+        :height="186"
+      ></the-avatar>
       <!-- <img src="/src/assets/portfolio/88178.jpg" :width="186" :height="186" alt=""> -->
       <div class="profile">
         <p class="name">
-          <span style="letter-spacing: 10px">陳寬鴻</span
+          <span style="letter-spacing: 10px">{{ user[0].userName }}</span
           ><router-link to="/profile/edit">編輯個人資料</router-link>
         </p>
-        <p class="handle">win87525@gmail.com</p>
+        <span class="mg-ri">{{ user[0].nickName }}</span>
+        <span class="mg-ri">{{ user[0].phone }}</span>
+
         <div class="description">
-          <ul>
-            <li>90後設計師🧑‍🎨</li>
-            <li>畢業於實踐大學🎓</li>
-            <li>熱情活潑  熱愛分享</li>
-            <li>喜愛籃球🏀 羽球🏸️</li>
-          </ul>
+          <pre>{{ user[0].introduce }}</pre>
         </div>
-        <!-- <p class="website">https//com</p> -->
-        <p class="website">#喜愛與人交流 #活潑 #幽默 #開朗</p>
+        <p class="handle">{{ user[0].email }}</p>
+        <p class="website">{{ user[0].website }}</p>
       </div>
     </div>
     <div class="tabs">
-      <div class="tab active">
+      <div :class="{ tab: true, active: showDiv1 }" @click="updateShowDiv(1)">
         <the-icon icon="posts"></the-icon>
         <p>我的</p>
       </div>
-      <div class="tab">
+      <div :class="{ tab: true, active: showDiv2 }" @click="updateShowDiv(2)">
         <the-icon icon="like"></the-icon>
         <p>按讚</p>
       </div>
-      <div class="tab">
+      <div :class="{ tab: true, active: showDiv3 }" @click="updateShowDiv(3)">
         <the-icon icon="favorite"></the-icon>
         <p>收藏</p>
       </div>
     </div>
     <div class="tabContent">
-      <p>6篇貼文</p>
-      <div class="posts">
+      <!-- <p>6篇貼文</p> -->
+      <div class="posts" v-if="showDiv1">
         <img
           :src="item.img"
           class="postImage"
           v-for="item in items"
           :key="item.id"
         />
-        <!-- <p>123</p> -->
+      </div>
+      <div class="posts" v-if="showDiv2">
+        <img
+          :src="personal.img"
+          class="postImage"
+          v-for="personal in isLike"
+          :key="personal.id"
+        />
+      </div>
+      <div class="posts" v-if="showDiv3">
+        <img
+          :src="personal.img"
+          class="postImage"
+          v-for="personal in isFavorite"
+          :key="personal.id"
+        />
       </div>
     </div>
   </div>
@@ -55,6 +71,34 @@ import TheIcon from "../components/TheIcon.vue";
 import TheAvatar from "../components/TheAvatar.vue";
 import { ref, computed, provide } from "vue";
 
+//取得vuex裡的數組items
+import { useStore } from "vuex";
+const store = useStore();
+const personal = computed(() => store.state.items);
+const user = computed(() => store.state.user);
+
+//控制只顯示有點讚的貼文
+const isLike = computed(() => {
+  return personal.value.filter((personal) => personal.isLike);
+});
+
+//控制只顯示有收藏的貼文
+const isFavorite = computed(() => {
+  return personal.value.filter((personal) => personal.isFavorite);
+});
+
+//寫控制顯示哪一個div(個人、按讚、收藏)
+const showDiv1 = ref(true);
+const showDiv2 = ref(false);
+const showDiv3 = ref(false);
+
+const updateShowDiv = (index) => {
+  showDiv1.value = index === 1;
+  showDiv2.value = index === 2;
+  showDiv3.value = index === 3;
+};
+
+//創造一個放個人作品的陣列
 const items = ref([
   {
     id: 1,
@@ -98,6 +142,7 @@ console.log(items.img);
 .profile .name {
   display: flex;
   align-items: center;
+  margin-bottom: 14px;
 }
 
 .profile .name > span {
@@ -108,14 +153,20 @@ console.log(items.img);
   text-decoration: none;
   margin-left: 26px;
 }
-.profile .handle {
-  margin-top: 16px;
+
+.mg-ri {
+  color: #848484;
+  margin-right: 20px;
+}
+ .handle {
+  margin-top: 20px;
+  margin-bottom: 16px;
   color: #848484;
 }
 
 .profile .description {
   margin-top: 26px;
-  margin-bottom: 22px;
+  /* margin-bottom: 10px; */
 }
 
 .tabs {
@@ -171,6 +222,9 @@ console.log(items.img);
   background: #eee;
   object-fit: cover;
   object-position: bottom;
+}
+pre {
+  line-height: 34px;
 }
 ul {
   list-style: none;

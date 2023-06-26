@@ -39,7 +39,7 @@
         </div>
       </div>
     </nav>
-    <PostUpload v-if="isPostUploadVisible" />
+    <PostUpload v-if="showUpload" />
   </div>
 </template>
 
@@ -49,18 +49,20 @@ import TheIcon from "./TheIcon.vue";
 import TheAvatar from "../components/TheAvatar.vue";
 import PostUpload from "../components/PostUpload.vue";
 import { ref } from "vue";
-
+//做頭像選單切換
 const isMenuVisible = ref(false);
-
 function showBar() {
   isMenuVisible.value = !isMenuVisible.value;
 }
+//導入showPostUpload的值，去做到切換，因為不同組件
+import { computed } from "vue";
+import { useStore } from "vuex";
+const store = useStore();
+const showUpload = computed(() => store.state.showPostUpload);
+const showPostUpload = () => {
+  store.commit("showPostUpload");
+};
 
-const isPostUploadVisible = ref(false);
-
-function showPostUpload() {
-  isPostUploadVisible.value = true;
-}
 </script>
 
 

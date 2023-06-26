@@ -1,9 +1,8 @@
 <template>
   <div class="postActions">
-
     <the-icon
       icon="like"
-      @click="isLike = !isLike"
+      @click="onLike"
       :fill="isLike ? '#ff0012' : 'none'"
       :stroke="isLike ? 'none' : '#000000'"
     ></the-icon>
@@ -15,61 +14,32 @@
       :stroke="isFavorite ? 'none' : '#000000'"
     >
     </the-icon>
-    <span>{{props.like}}</span>
-    <span>{{props.comment}}</span>
-    <span>{{props.collect}}</span>
-
-    
-   
+    <span>{{ props.like }}</span>
+    <span>{{ props.comment }}</span>
+    <span>{{ props.collect }}</span>
   </div>
 </template>
 
 <script setup>
 import TheIcon from "../components/TheIcon.vue";
 import { inject, ref } from "vue";
-const props=defineProps(['like','comment','collect','isLike','isFavorite'])
 
+const props = defineProps([
+  "like",
+  "comment",
+  "collect",
+  "isLike",
+  "isFavorite",
+  "onLike",
+]);
+const onLike = (id) => {
+  props.onLike(props.id);
+};
 
 // 愛心的填滿
 const isLike = ref(props.isLike);
 //喜歡的填滿效果
 const isFavorite = ref(props.isFavorite);
-
-const items = ref([
-  {
-    id: 1,
-    isLike: true,
-    isFavorite: false,
-  },
-  {
-    id: 2,
-    isLike: false,
-    isFavorite: true,
-  },
-  {
-    id: 3,
-    isLike: false,
-    isFavorite: true,
-  },
-  {
-    id: 4,
-    isLike: true,
-    isFavorite: false,
-  },
-  {
-    id: 5,
-    isLike: false,
-    isFavorite: true,
-  },
-  {
-    id: 6,
-    isLike: true,
-    isFavorite: false,
-  },
-]);
-// console.log(items[0].isLike);
-
-
 </script>
 
 <style scoped>

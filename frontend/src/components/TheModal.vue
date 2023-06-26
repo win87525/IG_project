@@ -2,7 +2,7 @@
   <div class="modal" id="modal">
     <div class="backdrop"></div>
     <div class="modalContent">
-      <button class="closeBtn" @click="closeModal"><the-icon icon="close"></the-icon></button>
+      <button class="closeBtn" @click="showPostUpload"><the-icon icon="close"></the-icon></button>
       <slot></slot>
     </div>
   </div>
@@ -10,10 +10,15 @@
 
 <script setup>
 import TheIcon from "./TheIcon.vue";
-// 關閉按鈕還有待處理
-function closeModal() {
-  document.getElementById('modal').style.display = "none";
-}
+
+//上傳貼文窗的切換
+import { computed } from "vue";
+import { useStore } from "vuex";
+const store = useStore();
+const showPostUpload = () => {
+  store.commit("showPostUpload");
+};
+
 </script>
 
 <style scoped>

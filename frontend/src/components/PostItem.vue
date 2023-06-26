@@ -12,17 +12,29 @@
         <!-- <img src="#" class="avatar" alt="" /> -->
         <the-avatar></the-avatar>
         <span>{{ props.name }}</span>
-        <span class="postPubData">12小時</span>
-        <post-actions 
-        :like="props.like"
-        :comment="props.comment"
-        :collect="props.collect"
-        :isLike="props.isLike" 
-        :isFavorite="props.isFavorite"></post-actions>
+        <span class="postPubData">{{props.time}}</span>
+        <div class="postActions">
+          <the-icon
+            icon="like"
+            @click="onLike"
+            :fill="isLike ? '#ff0012' : 'none'"
+            :stroke="isLike ? 'none' : '#000000'"
+          ></the-icon>
+          <the-icon icon="comment" fill="none" stroke="#000000"> </the-icon>
+          <the-icon
+            icon="favorite"
+            @click="onFavorite"
+            :fill="isFavorite ? '#F7E048' : 'none'"
+            :stroke="isFavorite ? 'none' : '#000000'"
+          >
+          </the-icon>
+          <span>{{ props.like }}</span>
+          <span>{{ props.comment }}</span>
+          <span>{{ props.favorite }}</span>
+        </div>
       </div>
       <div class="postDesc">
         <p>{{ props.text }}</p>
-        <!-- <p>{{props.number}}</p> -->
       </div>
     </div>
     <!-- <PostUDetails /> -->
@@ -31,18 +43,57 @@
 
 <script setup >
 import TheAvatar from "../components/TheAvatar.vue";
-import PostActions from "../components/PostActions.vue";
 import PostUDetails from "../components/PostDetails.vue";
-// import HomePage from "../assets/HomePage"
-import { ref } from "vue";
+import TheIcon from "../components/TheIcon.vue";
 
-const props=defineProps(["name","text",'img','like','comment','collect','isLike','isFavorite'])
-const img = props.img
+//接收父組件傳遞進來的值
+const props = defineProps([
+  "id",
+  "name",
+  "text",
+  "img",
+  "time",
+  "like",
+  "comment",
+  "favorite",
+  "isLike",
+  "isFavorite",
+  "onLike",
+  "onFavorite"
+]);
+const img = props.img;
 // console.log(img);
+
+const onLike = (id) => {
+  props.onLike(props.id);
+};
+
+const onFavorite = (id) => {
+  props.onFavorite(props.id);
+};
 </script>
 
 
 <style scoped>
+.postActions {
+  /* grid-area: actions; */
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  justify-items: center;
+  /* justify-self: end; */
+  column-gap: 20px;
+  row-gap: 4px;
+}
+.postActions > svg {
+  width: 32px;
+  height: 32px;
+  grid: -row 1/2;
+  cursor: pointer;
+}
+.postActions > span {
+  font-size: 14px;
+}
+
 .postItem {
   box-shadow: 0px 12px 24px rgba(0, 0, 0, 0.08);
   border-radius: 8px;

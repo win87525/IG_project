@@ -1,21 +1,26 @@
 <template>
 <div>
 <h2 class="title">搜索結果：植物</h2>
- <post-list class="postList">
+ <div class="postList">
     <post-item v-for="n in 10" :key="n"></post-item>
- </post-list>
+ </div>
 </div>
     <!-- <post-details></post-details> -->
     <!-- <post-upload></post-upload> -->
 </template>
 
 <script setup>
-import PostIst from "../components/PostList.vue";
+// import PostIst from "../components/PostList.vue";
 import PostItem from "../components/PostItem.vue";
 </script>
 
 
 <style scoped>
+.postList {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 48px;
+}
 .postList {
   display: grid;
   grid-template-columns: 1fr 1fr;
