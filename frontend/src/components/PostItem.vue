@@ -143,6 +143,12 @@ const onFavorite = (id) => {
 </style>
 <style scoped>
 
+@media(max-width:1440px) {
+.postItem > img{
+  height: 380px;
+}
+}
+
 @media(max-width:1024px) {
 .postItem > img{
   height: 300px;

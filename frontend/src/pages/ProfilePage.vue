@@ -218,7 +218,7 @@ console.log(items.img);
 
 .postImage {
   width: 100%;
-  height: 321px;
+  height: 320px;
   background: #eee;
   object-fit: cover;
   object-position: bottom;
@@ -235,34 +235,44 @@ li {
 }
 </style>
 <style scoped>
-@media (max-width: 1024px) {
+@media (max-width: 1200px) {
   .posts {
     grid-template-columns: 1fr 1fr;
   }
-  .profileContainer {
-  grid-template-columns: .4fr .6fr;
 }
+@media (max-width: 1024px) {
+  .profileContainer {
+    grid-template-columns: 0.4fr 0.6fr;
+  }
 }
 @media (max-width: 768px) {
-  .posts>img{
+  .posts > img {
     height: 300px;
   }
 }
-@media (max-width: 500px) {
-.profileContainer{
-  grid-template-columns: 1fr ;
-}
-.avatar {
-  justify-self: center;
-  margin-bottom: 30px;
-}
-  .tabs {
-  grid-template-columns: repeat(3, 80px);
-}
+@media (max-width: 800px) {
   .posts {
     grid-template-columns: 1fr;
-      gap: 50px;
+    gap: 50px;
   }
-
+.postImage{
+  height: 400px;
+}
+}
+@media (max-width: 660px) {
+  .profileContainer {
+    grid-template-columns: 1fr;
+  }
+  .avatar {
+    justify-self: center;
+    margin-bottom: 30px;
+  }
+  .tabs {
+    grid-template-columns: repeat(3, 80px);
+  }
+  .posts {
+    grid-template-columns: 1fr;
+    gap: 50px;
+  }
 }
 </style>
