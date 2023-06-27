@@ -245,18 +245,14 @@ li {
     grid-template-columns: 0.4fr 0.6fr;
   }
 }
-@media (max-width: 768px) {
-  .posts > img {
-    height: 300px;
-  }
-}
+
 @media (max-width: 800px) {
   .posts {
     grid-template-columns: 1fr;
     gap: 50px;
   }
 .postImage{
-  height: 400px;
+  height: 420px;
 }
 }
 @media (max-width: 660px) {
@@ -274,5 +270,11 @@ li {
     grid-template-columns: 1fr;
     gap: 50px;
   }
+}
+@media (max-width: 390px) {
+
+.postImage{
+  height: 220px;
+}
 }
 </style>
