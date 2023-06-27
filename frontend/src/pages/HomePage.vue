@@ -42,5 +42,15 @@ const onFavorite = (id) => {
   grid-template-columns: 1fr 1fr 1fr;
   gap: 48px;
 }
+@media(max-width:1024px) {
+.postList{
+  grid-template-columns: 1fr 1fr;
+}
+}
+@media(max-width:768px) {
+.postList{
+  grid-template-columns: 1fr;
+}
+}
 </style>
 

@@ -140,10 +140,30 @@ const onFavorite = (id) => {
   margin-top: 28px;
   white-space: pre-line;
 }
-/* .avatar {
-  border-radius: 50%;
-  background: #eee;
-  object-fit: cover;
-  object-position: top center;
-} */
+</style>
+<style scoped>
+
+@media(max-width:1024px) {
+.postItem > img{
+  height: 300px;
+}
+}
+@media(max-width:768px) {
+  .postItem{
+    margin-bottom: 10px;
+  }
+.postItem > img{
+  height: 450px;
+}
+}
+@media(max-width:500px) {
+.postItem > img{
+  height: 320px;
+}
+}
+@media(max-width:390px) {
+.postItem > img{
+  height: 250px;
+}
+}
 </style>

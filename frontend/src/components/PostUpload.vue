@@ -2,7 +2,7 @@
   <the-modal>
     <div class="postUpload">
       <label class="upload">
-        <the-icon icon="upload-image"></the-icon>
+        <the-icon icon="upload-image" class="img"></the-icon>
         <input type="text" accept="image/*" class="fileChooser" />
       </label>
       <div class="postContent">
@@ -21,16 +21,15 @@
 import TheIcon from "./TheIcon.vue";
 import TheModal from "./TheModal.vue";
 import TheButton from "./TheButton.vue";
-
-
 </script>
 
 <style scoped>
 .postUpload {
-  width: 50vw;
+  width: 30vw;
   height: 70vh;
   display: grid;
   grid-template-rows: 4fr 1fr;
+  /* min-width: 30vw; */
 }
 .preview {
   width: 100%;
@@ -71,5 +70,45 @@ import TheButton from "./TheButton.vue";
   position: relative;
   right: 24px;
   bottom: 18px;
+}
+@media (max-width: 1800px) {
+  .postUpload {
+    width: 50vw;
+  }
+
+}
+@media (max-width: 1440px) {
+  .postUpload {
+    width: 40vw;
+  }
+
+}
+@media (max-width: 1024px) {
+  .postUpload {
+    width: 70vw;
+  }
+
+}
+@media (max-width: 768px) {
+  .postUpload {
+    width: 70vw;
+    height: 50vh;
+  }
+    .upload>svg{
+    transform:scale(.7);
+    position: relative;
+    bottom: 0px;
+  }
+}
+@media (max-width: 390px) {
+  .postUpload {
+    width: 80vw;
+    height: 45vh;
+  }
+  .upload>svg{
+    transform:scale(.6);
+    position: relative;
+    bottom: 25px;
+  }
 }
 </style>

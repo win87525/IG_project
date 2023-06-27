@@ -1,9 +1,9 @@
 <template>
   <div>
     <nav class="navbar">
-      <router-link to="/"
-        ><img src="../assets/logo.png" class="logo" alt="LOGO"
-      /></router-link>
+      <router-link to="/" class="icon_img">
+        <img src="../assets/logo.png" class="logo" alt="LOGO" />
+      </router-link>
       <div class="searchInput">
         <input type="text" />
         <the-icon icon="search" />
@@ -62,7 +62,6 @@ const showUpload = computed(() => store.state.showPostUpload);
 const showPostUpload = () => {
   store.commit("showPostUpload");
 };
-
 </script>
 
 
@@ -81,7 +80,7 @@ const showPostUpload = () => {
   height: 38px;
 }
 .logo {
-  transform: scale(.7);
+  transform: scale(0.7);
 }
 
 .searchInput {
@@ -157,5 +156,41 @@ const showPostUpload = () => {
 
 .profileMenu a:visited {
   color: initial;
+}
+</style>
+<style scoped>
+@media (max-width: 1024px) {
+  .logo {
+    position: relative;
+    right: 40px;
+  }
+}
+@media (max-width: 768px) {
+  .navbar {
+    width: 80vw;
+  }
+  .logo {
+    position: relative;
+    right: 80px;
+  }
+  .searchInput {
+    position: relative;
+    right: 60px;
+  }
+}
+@media (max-width: 500px) {
+  .navbar {
+    width: 80vw;
+    gap: 10px;
+    grid-template-columns: .4fr .6fr;
+  }
+  .icon_img {
+    display: none;
+  }
+
+  .searchInput {
+    position: relative;
+    right: 0px;
+  }
 }
 </style>

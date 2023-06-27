@@ -2,24 +2,27 @@
   <div>
     <h2 class="title">編輯個人資料</h2>
     <div class="changeAvatar">
-      <the-avatar  src="/src/assets/portfolio/88178.jpg" :width="48" :height="48" ></the-avatar>
+      <the-avatar
+        src="/src/assets/portfolio/88178.jpg"
+        :width="48"
+        :height="48"
+      ></the-avatar>
       <the-button>修改頭像</the-button>
       <!-- <input type="file" class="inputFile" /> -->
     </div>
     <form class="profileForm" @submit.prevent="handleSubmit">
-
       <label for="username">使用者名稱：</label>
-      <input type="text" v-model="userNameInput"/>
+      <input type="text" v-model="userNameInput" />
 
       <label for="name">暱稱：</label>
-      <input type="text"  v-model="nickNameInput"/>
+      <input type="text" v-model="nickNameInput" />
 
       <label for="intro">簡介：</label>
-      <textarea rows="12"  v-model="introduceInput"></textarea>
+      <textarea rows="12" v-model="introduceInput"></textarea>
       <!-- <input type="text"  v-model="introduceInput"> -->
 
-      <label for="mobilePhone" >手機號碼：</label>
-      <input type="text"  v-model="phoneInput"/>
+      <label for="mobilePhone">手機號碼：</label>
+      <input type="text" v-model="phoneInput" />
 
       <label>性别：</label>
       <div class="genderRadios">
@@ -29,11 +32,11 @@
         女
       </div>
 
-      <label for="email" >個人網頁：</label>
-      <input type="text"  v-model="emailInput"/>
+      <label for="email">個人網頁：</label>
+      <input type="text" v-model="emailInput" />
 
-      <label for="website" >個人標籤：</label>
-      <input type="text"  v-model="websiteInput"/>
+      <label for="website">個人標籤：</label>
+      <input type="text" v-model="websiteInput" />
 
       <div class="actions">
         <the-button type="reset" reverse @click="cancelButton">取消</the-button>
@@ -47,7 +50,7 @@
 // import TheIcon from "../components/TheIcon.vue";
 import TheButton from "../components/TheButton.vue";
 import TheAvatar from "../components/TheAvatar.vue";
-import { useRouter } from 'vue-router';
+import { useRouter } from "vue-router";
 import { computed, ref } from "vue";
 import { useStore } from "vuex";
 const store = useStore();
@@ -71,46 +74,45 @@ const phone = computed(() => store.state.user[0].phone);
 
 // 提交按鈕所執行的，if判斷當前輸入框如果為空，那就保持原本預設值，有新資料就更新
 const handleSubmit = () => {
- if (userNameInput.value !== "") {
+  if (userNameInput.value !== "") {
     store.commit("updateUserName", userNameInput.value);
   }
   userNameInput.value = ""; // 清空輸入值
 
- if (nickNameInput.value !== "") {
+  if (nickNameInput.value !== "") {
     store.commit("updateNickName", nickNameInput.value);
   }
   nickNameInput.value = ""; // 清空輸入值
 
- if (emailInput.value !== "") {
+  if (emailInput.value !== "") {
     store.commit("updateEmail", emailInput.value);
   }
   emailInput.value = ""; // 清空輸入值
 
- if (introduceInput.value !== "") {
+  if (introduceInput.value !== "") {
     store.commit("updateIntroduce", introduceInput.value);
   }
   introduceInput.value = ""; // 清空輸入值
 
- if (websiteInput.value !== "") {
+  if (websiteInput.value !== "") {
     store.commit("updateWebsite", websiteInput.value);
   }
   websiteInput.value = ""; // 清空輸入值
 
- if (phoneInput.value !== "") {
+  if (phoneInput.value !== "") {
     store.commit("updatePhone", phoneInput.value);
   }
   phoneInput.value = ""; // 清空輸入值
 
- alert("修改成功");
- //顯示成功並跳轉回去
- router.push('/profile');
+  alert("修改成功");
+  //顯示成功並跳轉回去
+  router.push("/profile");
 };
 
 //取消鈕，甚麼都不做，直接跳回個人頁
-const cancelButton=()=>{
-   router.push('/profile');
-}
-
+const cancelButton = () => {
+  router.push("/profile");
+};
 </script>
 
 <style scoped>
@@ -158,5 +160,14 @@ const cancelButton=()=>{
   justify-self: end;
   display: flex;
   gap: 16px;
+}
+@media (max-width: 390px) {
+  .profileForm {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    row-gap: 32px;
+    column-gap: 10px;
+    margin-top: 38px;
+  }
 }
 </style>

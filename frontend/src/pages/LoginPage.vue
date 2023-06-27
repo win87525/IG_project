@@ -10,7 +10,11 @@
         <!-- <button type="submit" class="loginButton">
           {{ isLogin ? "登入" : "註冊" }}
         </button> -->
-        <router-link to="/"> <p class="loginButton">{{ isLogin ? "登入" : "註冊" }}</p></router-link>
+        <router-link to="/">
+          <p class="loginButton">
+            {{ isLogin ? "登入" : "註冊" }}
+          </p></router-link
+        >
         <p class="info" @click="isLogin = !isLogin">
           {{ isLogin ? "還沒有帳號? 點擊註冊" : "已有帳號? 點擊登入吧" }}
         </p>
@@ -102,5 +106,36 @@ a {
   gap: 6px;
   position: relative;
   left: 22px;
+}
+</style>
+<style scoped>
+@media (max-width: 1024px) {
+  .phoneImage {
+    max-width: 320px;
+    position: relative;
+    justify-self: center;
+  }
+}
+@media (max-width: 768px) {
+  .phoneImage {
+    max-width: 250px;
+    position: relative;
+    justify-self: center;
+  }
+  .loginForm {
+    transform: scale(.8);
+    position: relative;
+    right: 20px;
+  }
+}
+@media (max-width: 390px) {
+  .phoneImage {
+display: none;
+  }
+  .loginForm {
+    transform: scale(.8);
+    position: relative;
+    right: 30px;
+  }
 }
 </style>

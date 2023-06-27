@@ -158,7 +158,7 @@ console.log(items.img);
   color: #848484;
   margin-right: 20px;
 }
- .handle {
+.handle {
   margin-top: 20px;
   margin-bottom: 16px;
   color: #848484;
@@ -171,12 +171,12 @@ console.log(items.img);
 
 .tabs {
   display: grid;
-  grid-template-columns: repeat(3, 88px);
+  grid-template-columns: repeat(3, 100px);
   column-gap: 4vw;
   justify-content: center;
 
   margin-top: 7vmin;
-  margin-bottom: 20px;
+  margin-bottom: 40px;
 }
 
 .tab {
@@ -232,5 +232,37 @@ ul {
 }
 li {
   letter-spacing: 7px;
+}
+</style>
+<style scoped>
+@media (max-width: 1024px) {
+  .posts {
+    grid-template-columns: 1fr 1fr;
+  }
+  .profileContainer {
+  grid-template-columns: .4fr .6fr;
+}
+}
+@media (max-width: 768px) {
+  .posts>img{
+    height: 300px;
+  }
+}
+@media (max-width: 500px) {
+.profileContainer{
+  grid-template-columns: 1fr ;
+}
+.avatar {
+  justify-self: center;
+  margin-bottom: 30px;
+}
+  .tabs {
+  grid-template-columns: repeat(3, 80px);
+}
+  .posts {
+    grid-template-columns: 1fr;
+      gap: 50px;
+  }
+
 }
 </style>
