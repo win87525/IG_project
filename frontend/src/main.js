@@ -92,7 +92,8 @@ const store = createStore({
                     phone: "0937524519",
                 }
             ],
-            showPostUpload: false
+            showPostUpload: false,
+            showPostDetails: false,
         };
     },
     mutations: {
@@ -123,6 +124,9 @@ const store = createStore({
         //用來做貼文上傳切換窗
         showPostUpload(state) {
             state.showPostUpload = !state.showPostUpload
+        },
+        showPostDetails(state) {
+            state.showPostDetails = !state.showPostDetails
         },
         // 觸發更新值
         updateUserName(state, value) {

@@ -6,13 +6,14 @@
       width="100%"
       height="100%"
       style="background: #eee"
+      @click="toggleDetails"
     />
     <div class="postInfo">
       <div class="postMeta">
         <!-- <img src="#" class="avatar" alt="" /> -->
         <the-avatar></the-avatar>
         <span>{{ props.name }}</span>
-        <span class="postPubData">{{props.time}}</span>
+        <span class="postPubData">{{ props.time }}</span>
         <div class="postActions">
           <the-icon
             icon="like"
@@ -37,15 +38,33 @@
         <p>{{ props.text }}</p>
       </div>
     </div>
-    <!-- <PostUDetails /> -->
+    <post-details
+      v-if="showDetails"
+      :item="props"
+      :show-details="showDetails"
+      @update:showDetails="showDetails = $event"
+      :id="props.id"
+      :name="props.name"
+      :text="props.text"
+      :img="props.img"
+      :time="props.time"
+      :like="props.like"
+      :comment="props.comment"
+      :favorite="props.favorite"
+      :isLike="props.isLike"
+      :isFavorite="props.isFavorite"
+      :onLike="onLike"
+      :onFavorite="onFavorite"
+    ></post-details>
+    <!-- <button @click="toggleDetails">Show Details</button> -->
   </div>
 </template>
 
 <script setup >
 import TheAvatar from "../components/TheAvatar.vue";
-import PostUDetails from "../components/PostDetails.vue";
+import PostDetails from "../components/PostDetails.vue";
 import TheIcon from "../components/TheIcon.vue";
-
+import { defineProps, ref } from "vue";
 //接收父組件傳遞進來的值
 const props = defineProps([
   "id",
@@ -59,7 +78,7 @@ const props = defineProps([
   "isLike",
   "isFavorite",
   "onLike",
-  "onFavorite"
+  "onFavorite",
 ]);
 const img = props.img;
 // console.log(img);
@@ -70,6 +89,11 @@ const onLike = (id) => {
 
 const onFavorite = (id) => {
   props.onFavorite(props.id);
+};
+
+const showDetails = ref(false);
+const toggleDetails = () => {
+  showDetails.value = !showDetails.value;
 };
 </script>
 
@@ -142,34 +166,33 @@ const onFavorite = (id) => {
 }
 </style>
 <style scoped>
+@media (max-width: 1440px) {
+  .postItem > img {
+    height: 380px;
+  }
+}
 
-@media(max-width:1440px) {
-.postItem > img{
-  height: 380px;
+@media (max-width: 1024px) {
+  .postItem > img {
+    height: 300px;
+  }
 }
-}
-
-@media(max-width:1024px) {
-.postItem > img{
-  height: 300px;
-}
-}
-@media(max-width:768px) {
-  .postItem{
+@media (max-width: 768px) {
+  .postItem {
     margin-bottom: 10px;
   }
-.postItem > img{
-  height: 450px;
+  .postItem > img {
+    height: 450px;
+  }
 }
+@media (max-width: 500px) {
+  .postItem > img {
+    height: 320px;
+  }
 }
-@media(max-width:500px) {
-.postItem > img{
-  height: 320px;
-}
-}
-@media(max-width:390px) {
-.postItem > img{
-  height: 250px;
-}
+@media (max-width: 390px) {
+  .postItem > img {
+    height: 250px;
+  }
 }
 </style>

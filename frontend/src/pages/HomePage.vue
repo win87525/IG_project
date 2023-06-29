@@ -16,12 +16,13 @@
       :onLike="onLike"
       :onFavorite="onFavorite"
     ></post-item>
+    <!-- <post-details></post-details> -->
   </div>
 </template>
 
 <script setup>
 import PostItem from "../components/PostItem.vue";
-import PostUDetails from "../components/PostDetails.vue";
+import PostDetails from "../components/PostDetails.vue";
 import { computed } from "vue";
 import { useStore } from "vuex";
 
