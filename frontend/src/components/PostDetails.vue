@@ -147,6 +147,7 @@ const toggleDetails = () => {
 .postImage {
   width: 100%;
   height: 100%;
+  min-width: 400px;
   object-fit: cover;
   /* border: none; */
   /* border: 1px solid red; */
@@ -159,6 +160,7 @@ const toggleDetails = () => {
   grid-template-rows: max-content max-content 1fr max-content;
   max-height: 100%;
   height: 100%;
+  background-color: white;
 }
 
 .author {
@@ -221,7 +223,7 @@ const toggleDetails = () => {
 }
 .commentInput {
   background: #f7f7f7;
-  border-radius: 16px;
+  border-radius: 8px;
   border: none;
   grid-column: 1 / 4;
 }
@@ -255,5 +257,92 @@ const toggleDetails = () => {
 }
 .postActions > span {
   font-size: 14px;
+}
+</style>
+<style scoped>
+@media(max-width:1200px) {
+.postDetails{
+  width: 70vw;
+}
+}
+@media(max-width:1024px) {
+.postDetails{
+  width: 75vw;
+}
+}
+@media(max-width:800px) {
+.postDetails{
+  grid-template-columns: 1fr ;
+     grid-template-rows: minmax(300px, 1fr);
+     min-height: 600px;
+}
+.postMeta {
+  padding: 20px;
+  padding-top: 12px;
+  display: grid;
+  align-items: start;
+  grid-template-rows: max-content max-content 1fr max-content;
+  max-height: 100%;
+  height: 100%;
+  background-color: white;
+}
+.comments{
+  display: none;
+}
+.actions {
+  border-top: 1px solid #eaeaea;
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  align-items: center;
+  margin: 0px -24px 0px -24px;
+  padding: 20px 24px 0 24px;
+  row-gap: 16px;
+}
+.commentPubBtn{
+  grid-column: 5/6;
+}
+}
+@media(max-width:500px) {
+.postDetails{
+    width: 80vw;
+}
+.commentPubBtn{
+  font-size: 14px;
+}
+
+}
+@media(max-width:390px) {
+.postDetails{
+  grid-template-columns: 1fr ;
+     grid-template-rows: minmax(200px, 1fr);
+     min-height: 550px;
+}
+.commentPubBtn{
+  font-size: 14px;
+}
+.commentInput {
+  background: #f7f7f7;
+  border-radius: 4px;
+  border: none;
+  grid-column: 1 /3;
+}
+.postPubDate {
+  color: #9f9f9f;
+  grid-column: 2 / 5;
+  justify-self: end;
+  font-size: 12px;
+}
+.commentPubBtn {
+  font-size: 14px;
+  margin-left: 30px;
+  grid-column: 3 / 5;
+}
+.postActions {
+  column-gap: 20px;
+  row-gap: 4px;
+}
+.actions{
+  width: 380px;
+}
 }
 </style>
