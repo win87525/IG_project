@@ -26,7 +26,7 @@
           <div class="dropdownMenu" v-if="isMenuVisible">
             <ul class="profileMenu">
               <li @click="showBar">
-                <router-link to="/profile">個人主頁</router-link>
+                <router-link to="/profile/AboutMe">個人主頁</router-link>
               </li>
               <li @click="showBar">
                 <router-link to="/profile/edit">修改個人資料</router-link>

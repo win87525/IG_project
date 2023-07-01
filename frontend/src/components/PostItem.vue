@@ -12,7 +12,9 @@
       <div class="postMeta">
         <!-- <img src="#" class="avatar" alt="" /> -->
         <the-avatar></the-avatar>
+        <router-link class="a_Name" :to="'/profile/' + props.url">
         <span>{{ props.name }}</span>
+        </router-link>
         <span class="postPubData">{{ props.time }}</span>
         <div class="postActions">
           <the-icon
@@ -68,6 +70,7 @@ import { defineProps, ref } from "vue";
 //接收父組件傳遞進來的值
 const props = defineProps([
   "id",
+  "url",
   "name",
   "text",
   "img",
@@ -163,6 +166,11 @@ const toggleDetails = () => {
 .postDesc {
   margin-top: 28px;
   white-space: pre-line;
+}
+.a_Name{
+  text-decoration: none;
+  color: black;
+  font-size: 18px;
 }
 </style>
 <style scoped>

@@ -1,26 +1,25 @@
 <template>
   <div>
-    <div class="profileContainer" v-for="item in filteredItems" :key="item.id">
-      <!-- <p>{{ item.name }}</p> -->
+    <div class="profileContainer">
       <the-avatar
-        src="/src/assets/avatarDefault.png"
+        src="/src/assets/portfolio/88178.jpg"
         :width="186"
         :height="186"
       ></the-avatar>
       <!-- <img src="/src/assets/portfolio/88178.jpg" :width="186" :height="186" alt=""> -->
       <div class="profile">
         <p class="name">
-          <span style="letter-spacing: 10px">{{ item.name }}</span>
-          <!-- <router-link to="/profile/edit">編輯個人資料</router-link> -->
+          <span style="letter-spacing: 10px">{{ user[0].userName }}</span
+          ><router-link to="/profile/edit">編輯個人資料</router-link>
         </p>
-        <span class="mg-ri">{{ item.nickName }}</span>
-        <span class="mg-ri">{{ item.phone }}</span>
+        <span class="mg-ri">{{ user[0].nickName }}</span>
+        <span class="mg-ri">{{ user[0].phone }}</span>
 
         <div class="description">
-          <pre>{{ item.introduce }}</pre>
+          <pre>{{ user[0].introduce }}</pre>
         </div>
-        <p class="handle">{{ item.email }}</p>
-        <p class="website">{{ item.website }}</p>
+        <p class="handle">{{ user[0].email }}</p>
+        <p class="website">{{ user[0].website }}</p>
       </div>
     </div>
     <div class="tabs">
@@ -28,11 +27,11 @@
         <the-icon icon="posts"></the-icon>
         <p>我的</p>
       </div>
-      <div :class="{ tab: true, active: showDiv2 }" >
+      <div :class="{ tab: true, active: showDiv2 }" @click="updateShowDiv(2)">
         <the-icon icon="like"></the-icon>
         <p>按讚</p>
       </div>
-      <div :class="{ tab: true, active: showDiv3 }">
+      <div :class="{ tab: true, active: showDiv3 }" @click="updateShowDiv(3)">
         <the-icon icon="favorite"></the-icon>
         <p>收藏</p>
       </div>
@@ -41,9 +40,26 @@
       <!-- <p>6篇貼文</p> -->
       <div class="posts" v-if="showDiv1">
         <img
-          :src="url"
+          :src="item.img"
           class="postImage"
-          v-for="url in imageUrls" :key="url"
+          v-for="item in items"
+          :key="item.id"
+        />
+      </div>
+      <div class="posts" v-if="showDiv2">
+        <img
+          :src="personal.img"
+          class="postImage"
+          v-for="personal in isLike"
+          :key="personal.id"
+        />
+      </div>
+      <div class="posts" v-if="showDiv3">
+        <img
+          :src="personal.img"
+          class="postImage"
+          v-for="personal in isFavorite"
+          :key="personal.id"
         />
       </div>
     </div>
@@ -53,19 +69,22 @@
 <script setup>
 import TheIcon from "../components/TheIcon.vue";
 import TheAvatar from "../components/TheAvatar.vue";
-import { ref, computed, provide, onMounted } from "vue";
+import { ref, computed, provide } from "vue";
 import { useRoute } from 'vue-router';
 
 //取得vuex裡的數組items
 import { useStore } from "vuex";
 const store = useStore();
-// 取得main.js裡面，我自己個人的資料
+const personal = computed(() => store.state.items);
 const user = computed(() => store.state.user);
 
 const route = useRoute();
+// const store = useStore();
+const userId = computed(() => Number(route.params.userId));
+
 const filteredItems = computed(() => {
   // 使用過濾方法根據 userId 過濾項目
- return store.state.items.filter((item) => item.url === route.params.userId);
+  return store.state.items.filter((item) => item.id === userId.value);
 });
 
 //控制只顯示有點讚的貼文
@@ -89,19 +108,35 @@ const updateShowDiv = (index) => {
   showDiv3.value = index === 3;
 };
 
-// 取得狗狗照片
-const imageUrls = ref([]);
-onMounted(() => {
-  const currentDomain = window.location.pathname.split("/profile/")[1];
-fetch(`https://dog.ceo/api/breed/hound/${currentDomain}/images`)
-      .then(response => response.json())
-      .then(data => {
-        imageUrls.value = data.message.slice(0, 9);
-      })
-      .catch(error => {
-        console.error(error);
-      });
-})
+//創造一個放個人作品的陣列
+const items = ref([
+  {
+    id: 1,
+    img: "/src/assets/portfolio/sky.jpg",
+  },
+  {
+    id: 2,
+    img: "/src/assets/portfolio/fish.jpg",
+  },
+  {
+    id: 3,
+    img: "/src/assets/portfolio/card.png",
+  },
+  {
+    id: 4,
+    img: "/src/assets/portfolio/book.png",
+  },
+  {
+    id: 5,
+    img: "/src/assets/portfolio/page.jpg",
+  },
+  {
+    id: 6,
+    img: "/src/assets/portfolio/room_last.jpg",
+  },
+]);
+// console.log(items.img);
+
 </script>
 
 <style scoped>
@@ -197,7 +232,7 @@ fetch(`https://dog.ceo/api/breed/hound/${currentDomain}/images`)
   height: 320px;
   background: #eee;
   object-fit: cover;
-  object-position: center;
+  object-position: bottom;
 }
 pre {
   line-height: 34px;

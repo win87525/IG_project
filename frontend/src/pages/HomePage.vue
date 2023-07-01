@@ -4,6 +4,7 @@
       v-for="item in items"
       :key="item.id"
       :id="item.id"
+      :url="item.url"
       :name="item.name"
       :text="item.text"
       :img="item.img"

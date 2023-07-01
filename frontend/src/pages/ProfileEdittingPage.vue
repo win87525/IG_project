@@ -106,7 +106,7 @@ const handleSubmit = () => {
 
   alert("修改成功");
   //顯示成功並跳轉回去
-  router.push("/profile");
+  router.push("/profile/AboutMe");
 };
 
 //取消鈕，甚麼都不做，直接跳回個人頁
