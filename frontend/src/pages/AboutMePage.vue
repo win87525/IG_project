@@ -232,7 +232,7 @@ const items = ref([
   height: 320px;
   background: #eee;
   object-fit: cover;
-  object-position: bottom;
+  object-position: center;
 }
 pre {
   line-height: 34px;

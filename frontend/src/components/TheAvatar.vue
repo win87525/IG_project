@@ -1,4 +1,5 @@
 <template>
+  <!-- <img src="./assets/" alt=""> -->
   <img :src=" src || defaultAvatat" class="avatar" alt="" />
 </template>
 

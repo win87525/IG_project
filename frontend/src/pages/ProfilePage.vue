@@ -2,11 +2,12 @@
   <div>
     <div class="profileContainer" v-for="item in filteredItems" :key="item.id">
       <!-- <p>{{ item.name }}</p> -->
-      <the-avatar
+      <!-- <the-avatar
         src="/src/assets/avatarDefault.png"
         :width="186"
         :height="186"
-      ></the-avatar>
+      ></the-avatar> -->
+      <img :src="item.img" alt="" class="avatar">
       <!-- <img src="/src/assets/portfolio/88178.jpg" :width="186" :height="186" alt=""> -->
       <div class="profile">
         <p class="name">
@@ -93,10 +94,10 @@ const updateShowDiv = (index) => {
 const imageUrls = ref([]);
 onMounted(() => {
   const currentDomain = window.location.pathname.split("/profile/")[1];
-fetch(`https://dog.ceo/api/breed/hound/${currentDomain}/images`)
+fetch(`https://dog.ceo/api/breed/${currentDomain}/images`)
       .then(response => response.json())
       .then(data => {
-        imageUrls.value = data.message.slice(0, 9);
+        imageUrls.value = data.message.slice(0, 7);
       })
       .catch(error => {
         console.error(error);
@@ -208,6 +209,14 @@ ul {
 }
 li {
   letter-spacing: 7px;
+}
+.avatar {
+  width: 186px;
+  height: 186px;
+  border-radius: 50%;
+  background: #eee;
+  object-fit: cover;
+  object-position: top center;
 }
 </style>
 <style scoped>

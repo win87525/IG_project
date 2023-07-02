@@ -11,7 +11,8 @@
     <div class="postInfo">
       <div class="postMeta">
         <!-- <img src="#" class="avatar" alt="" /> -->
-        <the-avatar></the-avatar>
+        <!-- <the-avatar></the-avatar> -->
+        <img :src="img" alt="" class="avatar">
         <router-link class="a_Name" :to="'/profile/' + props.url">
         <span>{{ props.name }}</span>
         </router-link>
@@ -144,7 +145,7 @@ const toggleDetails = () => {
   grid-template-areas:
     "avatar name actions"
     "pubDate pubDate actions";
-  grid-template-columns: 42px 1fr 3fr;
+  grid-template-columns: 42px 1.1fr 3fr;
   row-gap: 6px;
   column-gap: 5px;
 }
@@ -166,11 +167,20 @@ const toggleDetails = () => {
 .postDesc {
   margin-top: 28px;
   white-space: pre-line;
+  line-height: 26px;
 }
 .a_Name{
   text-decoration: none;
   color: black;
   font-size: 18px;
+}
+.avatar {
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  background: #eee;
+  object-fit: cover;
+  object-position: top center;
 }
 </style>
 <style scoped>
