@@ -172,6 +172,7 @@ const toggleDetails = () => {
   width: 100%;
   white-space: pre-wrap;
   margin-top: 24px;
+  line-height: 28px;
 }
 .comments {
   display: grid;
